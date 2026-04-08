@@ -8,23 +8,23 @@
 <style>
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  color: white;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(135deg, #ffd6e0, #fff0f5);
   text-align: center;
+  overflow: hidden;
 }
 
 .container {
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .card {
-  background: rgba(255,255,255,0.1);
-  padding: 30px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
+  background: white;
+  padding: 25px;
+  border-radius: 25px;
   width: 320px;
   margin: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 img {
@@ -32,29 +32,29 @@ img {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid white;
+  border: 4px solid pink;
 }
 
 h1 {
-  margin: 10px 0;
+  color: #ff4d88;
 }
 
 #time {
-  font-size: 20px;
+  font-size: 18px;
   margin-top: 15px;
+  color: #ff4d88;
 }
 
-input, button {
-  margin-top: 10px;
-  padding: 8px;
-  border-radius: 10px;
-  border: none;
+.heart {
+  position: fixed;
+  color: pink;
+  animation: float 5s linear infinite;
 }
 
-button {
-  background: #ff4d6d;
-  color: white;
-  cursor: pointer;
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
 }
 </style>
 </head>
@@ -63,29 +63,20 @@ button {
 
 <div class="container">
   <div class="card">
-    <img src="https://i.imgur.com/4M34hi2.png" alt="couple">
+    <img src="https://i.imgur.com/4M34hi2.png">
     <h1 id="names">Đinh Bảo Huy ❤️ Phạm Thị Kim Thảo</h1>
-
-    <input type="date" id="startDate">
-    <br>
-    <button onclick="startLove()">Bắt đầu</button>
 
     <div id="time"></div>
   </div>
 </div>
 
 <audio id="music" autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes_Music/Romantic_Sentimental/Scott_Holmes_Music_-_03_-_Together_We_Will.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-let startTime;
-
-function startLove() {
-  startTime = new Date(document.getElementById("startDate").value);
-  update();
-  setInterval(update, 1000);
-}
+// 🔥 đặt sẵn ngày ở đây
+let startTime = new Date("2026-03-11");
 
 function update() {
   let now = new Date();
@@ -97,9 +88,27 @@ function update() {
   let seconds = Math.floor((diff / 1000) % 60);
 
   document.getElementById("time").innerHTML =
-    `Đã yêu nhau được <br><b>${days}</b> ngày <br>
-     ${hours} giờ ${minutes} phút ${seconds} giây ❤️`;
+    `💖 Đã yêu nhau 💖<br><b>${days}</b> ngày<br>
+     ${hours} giờ ${minutes} phút ${seconds} giây`;
 }
+
+// tự chạy luôn
+update();
+setInterval(update, 1000);
+
+// tạo tim bay
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}, 300);
 </script>
 
 </body>
