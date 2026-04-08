@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tụi mình ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  margin-top: 80px;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  width: 320px;
+  margin: auto;
+}
+
+img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+}
+
+h1 {
+  margin: 10px 0;
+}
+
+#time {
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+input, button {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+}
+
+button {
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+    <img src="https://i.imgur.com/4M34hi2.png" alt="couple">
+    <h1 id="names">Đinh Bảo Huy ❤️ Phạm Thị Kim Thảo</h1>
+
+    <input type="date" id="startDate">
+    <br>
+    <button onclick="startLove()">Bắt đầu</button>
+
+    <div id="time"></div>
+  </div>
+</div>
+
+<audio id="music" autoplay loop>
+  <source src="https://music.youtube.com/watch?v=w2QW0eRAQJg" type="audio/mpeg">
+</audio>
+
+<script>
+let startTime;
+
+function startLove() {
+  startTime = new Date(document.getElementById("startDate").value);
+  update();
+  setInterval(update, 1000);
+}
+
+function update() {
+  let now = new Date();
+  let diff = now - startTime;
+
+  let days = Math.floor(diff / (1000*60*60*24));
+  let hours = Math.floor((diff / (1000*60*60)) % 24);
+  let minutes = Math.floor((diff / (1000*60)) % 60);
+  let seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("time").innerHTML =
+    `Đã yêu nhau được <br><b>${days}</b> ngày <br>
+     ${hours} giờ ${minutes} phút ${seconds} giây ❤️`;
+}
+</script>
+
+</body>
+</html>
